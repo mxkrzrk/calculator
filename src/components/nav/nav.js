@@ -1,10 +1,10 @@
-import createElementHtml from '../../util/util.js';
-import createElementHTML from '../../util/util.js';
+import createElementHtml from '../../utils/utils.js';
 import './nav.css';
 
 function nav() {
-  const nav = createElementHTML('nav', [
+  const nav = createElementHtml('nav', [
     'nav',
+    'row',
     'd-flex',
     'justify-content-center',
     'align-items-center',
