@@ -1,13 +1,12 @@
-import createSemanticHtml from './utilities/semanticUI.js';
+import createElementHtml from './util/util.js';
+import nav from './components/nav/nav.js';
 
-function app(tagFather) {
-  const header = createSemanticHtml('header');
-  const main = createSemanticHtml('main');
-  const footer = createSemanticHtml('footer');
+function app(parentTag) {
+  const header = createElementHtml('header', ['container-fluid', 'px-0']);
+  const navBar = nav();
 
-  tagFather.insertAdjacentElement('afterbegin', header);
-  header.insertAdjacentElement('afterend', main);
-  main.insertAdjacentElement('afterend', footer);
+  parentTag.insertAdjacentElement('afterbegin', header);
+  header.insertAdjacentElement('afterbegin', navBar);
 }
 
 export default app;

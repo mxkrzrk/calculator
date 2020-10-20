@@ -5,6 +5,6 @@ import 'bootstrap/dist/css/bootstrap-grid.css';
 import '@fortawesome/fontawesome-free/js/all.js';
 import './app.css';
 
-const tagAppFather = document.getElementById('app');
+const appTag = document.getElementById('app');
 
-app(tagAppFather);
+app(appTag);

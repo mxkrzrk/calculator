@@ -1,0 +1,14 @@
+.nav {
+  background-color: #305973;
+  color: #8bbbd9;
+  padding: 1rem;
+}
+
+.nav-icon {
+  font-size: 2rem;
+}
+
+.nav-title {
+  padding: 0 1rem;
+  margin-bottom: 0;
+}
