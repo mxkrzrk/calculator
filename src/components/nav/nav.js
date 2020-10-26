@@ -1,4 +1,4 @@
-import createElementHtml from '../../utils/utils.js';
+import { createElementHtml } from '../../utils/utils.js';
 import './nav.css';
 
 function nav() {

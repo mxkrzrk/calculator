@@ -7,4 +7,8 @@ function createElementHtml(tag, classes = [], content = '') {
   return el;
 }
 
-export default createElementHtml;
+function cleanHTML(tag) {
+  tag.innerHTML = '';
+}
+
+export { createElementHtml, cleanHTML };

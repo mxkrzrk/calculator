@@ -1,0 +1,21 @@
+.keypad {
+  background-color: #4e84a6;
+  padding: 1rem 0;
+}
+
+.keypad-key {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 1rem 2rem;
+  margin: 0.5rem;
+  border-radius: 5px;
+}
+
+.keypad-key--number {
+  background-color: #1b3240;
+}
+
+.keypad-key--operation {
+  background-color: #305973;
+}
