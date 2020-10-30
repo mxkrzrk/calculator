@@ -1,11 +1,12 @@
 import { createElementHtml } from '../../utils/utils.js';
 import './display.css';
 
-function display(operation) {
+function display(display) {
+  const displayResult = display;
   const displayRow = createElementHtml('div', ['row']);
-  const displayContent = createElementHtml('div', ['display'], operation);
+  const displayContent = createElementHtml('div', ['display'], displayResult);
 
-  displayRow.insertAdjacentElement('afterbegin', displayContent);
+  displayRow.appendChild(displayContent);
 
   return displayRow;
 }
