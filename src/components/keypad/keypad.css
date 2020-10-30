@@ -1,6 +1,7 @@
 .keypad {
-  background-color: #4e84a6;
+  background-color: #212747;
   padding: 1rem 0;
+  height: 70vh;
 }
 
 .keypad-key {
@@ -8,14 +9,25 @@
   font-size: 16px;
   font-weight: 700;
   padding: 1rem 2rem;
-  margin: 0.5rem;
+  margin-bottom: 0.5rem;
   border-radius: 5px;
 }
 
 .keypad-key--number {
-  background-color: #1b3240;
+  background-color: #0d0d0d;
+  border: 2px outset #1f1f1f;
+}
+
+.keypad-key--equal {
+  background-color: #384173;
+  border: 2px outset #4f5ba0;
 }
 
 .keypad-key--operation {
-  background-color: #305973;
+  background-color: #7587bf;
+  border: 2px outset #8397d4;
+}
+
+.keypad-key--operation:disabled {
+  background-color: #353c4e;
 }
