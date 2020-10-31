@@ -47,7 +47,7 @@ function clickKeyHandler(e) {
     calculationData.secondOperand = [];
     calculationData.operation = e.target.innerText;
     calculationData.display = calculationData.firstOperand.join('');
-  } else if (keyType === 'equal' && calculationData.secondOperand > 0) {
+  } else if (keyType === 'equal' && calculationData.secondOperand.length > 0) {
     const op1 = parseFloat(calculationData.firstOperand.join(''));
     const op2 = parseFloat(calculationData.secondOperand.join(''));
     const result = calculationResult(op1, calculationData.operation, op2);
@@ -60,6 +60,7 @@ function clickKeyHandler(e) {
 }
 
 function app(parentTag) {
+  console.log(calculationData);
   // Create calculator
   const header = createElementHtml('header', ['container-fluid']);
   const navBar = nav();
