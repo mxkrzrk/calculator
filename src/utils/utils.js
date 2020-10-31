@@ -1,12 +1,16 @@
 function createElementHtml(tag, classes = [], content = '', attribute = []) {
   const el = document.createElement(tag);
+
   if (classes.length > 0) {
     classes.forEach((cl) => el.classList.add(cl));
   }
+
   if (attribute.length > 0) {
     attribute.forEach((attr) => el.setAttribute(attr.name, attr.value));
   }
+
   el.textContent = content;
+
   return el;
 }
 
@@ -35,4 +39,16 @@ function calculationResult(firstOp, op, secondOp) {
   return result;
 }
 
-export { createElementHtml, cleanHTML, calculationResult };
+function cleanCalculationData(data) {
+  data.firstOperand = [];
+  data.operation = null;
+  data.secondOperand = [];
+  data.result = 0;
+}
+
+export {
+  createElementHtml,
+  cleanHTML,
+  calculationResult,
+  cleanCalculationData,
+};

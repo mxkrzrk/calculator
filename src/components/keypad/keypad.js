@@ -1,34 +1,6 @@
-import { app, APP_TAG, calculationData } from '../../app.js';
-import {
-  createElementHtml,
-  cleanHTML,
-  calculationResult,
-} from '../../utils/utils.js';
+import { clickKeyHandler } from '../../app.js';
+import { createElementHtml } from '../../utils/utils.js';
 import './keypad.css';
-
-function clickKeyHandler(e) {
-  const keyType = e.target.dataset.type;
-
-  if (keyType === 'number' && calculationData.operation === null) {
-    calculationData.firstOperand.push(e.target.innerText);
-    calculationData.display = calculationData.firstOperand.join('');
-  } else if (keyType === 'number' && calculationData.operation !== null) {
-    calculationData.secondOperand.push(e.target.innerText);
-    calculationData.display = calculationData.secondOperand.join('');
-    calculationData.disabledOperation = true;
-  } else if (keyType === 'operation') {
-    calculationData.operation = e.target.innerText;
-    calculationData.display = '';
-  } else if (keyType === 'equal') {
-    const op1 = parseInt(calculationData.firstOperand.join(''));
-    const op2 = parseInt(calculationData.secondOperand.join(''));
-    const result = calculationResult(op1, calculationData.operation, op2);
-    calculationData.display = result;
-  }
-
-  cleanHTML(APP_TAG);
-  app(APP_TAG);
-}
 
 function createKeypadKey(key, row) {
   // Create column
@@ -38,6 +10,7 @@ function createKeypadKey(key, row) {
     'justify-content-center',
     'align-items-center',
   ]);
+  
   // Create key
   let numberKey;
   if (isNaN(key) && key !== '.' && key !== '=') {
@@ -65,6 +38,7 @@ function createKeypadKey(key, row) {
       [{ name: 'data-type', value: 'number' }]
     );
   }
+
   // Append child to row
   keypadCol.appendChild(numberKey);
   row.appendChild(keypadCol);
