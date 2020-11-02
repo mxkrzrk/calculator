@@ -14,7 +14,6 @@ const calculationData = {
   firstOperand: [],
   operation: null,
   secondOperand: [],
-  result: 0,
   display: '',
 };
 
@@ -29,6 +28,11 @@ function clickKeyHandler(e) {
     calculationData.display = calculationData.secondOperand.join('');
   } else if (
     keyType === 'operation' &&
+    calculationData.firstOperand.length === 0
+  ) {
+    return;
+  } else if (
+    keyType === 'operation' &&
     calculationData.secondOperand.length === 0
   ) {
     calculationData.operation = e.target.innerText;
@@ -41,7 +45,6 @@ function clickKeyHandler(e) {
     const op1 = parseFloat(calculationData.firstOperand.join(''));
     const op2 = parseFloat(calculationData.secondOperand.join(''));
     const result = calculationResult(op1, calculationData.operation, op2);
-    calculationData.result = result;
     // Store the result as first operand
     calculationData.firstOperand = Array.from(result.toString());
     calculationData.secondOperand = [];
@@ -51,7 +54,12 @@ function clickKeyHandler(e) {
     const op1 = parseFloat(calculationData.firstOperand.join(''));
     const op2 = parseFloat(calculationData.secondOperand.join(''));
     const result = calculationResult(op1, calculationData.operation, op2);
-    calculationData.display = result;
+    calculationData.display = result.toString();
+    // Store the result as first operand
+    calculationData.firstOperand = Array.from(result.toString());
+    calculationData.secondOperand = [];
+    calculationData.operation = null;
+  } else if (keyType === 'clear') {
     cleanCalculationData(calculationData);
   }
 
@@ -60,7 +68,6 @@ function clickKeyHandler(e) {
 }
 
 function app(parentTag) {
-  console.log(calculationData);
   // Create calculator
   const header = createElementHtml('header', ['container-fluid']);
   const navBar = nav();

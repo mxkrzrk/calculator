@@ -43,7 +43,7 @@ function cleanCalculationData(data) {
   data.firstOperand = [];
   data.operation = null;
   data.secondOperand = [];
-  data.result = 0;
+  data.display = '';
 }
 
 export {

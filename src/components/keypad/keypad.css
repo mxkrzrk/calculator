@@ -1,6 +1,8 @@
 .keypad {
   background-color: #212747;
-  padding: 1rem 0;
+}
+
+.keypad-keys {
   height: 70vh;
 }
 
@@ -8,8 +10,8 @@
   color: #fff;
   font-size: 16px;
   font-weight: 700;
-  padding: 1rem 2rem;
-  margin-bottom: 0.5rem;
+  width: 100%;
+  height: 80%;
   border-radius: 5px;
 }
 
@@ -21,6 +23,11 @@
 .keypad-key--equal {
   background-color: #384173;
   border: 2px outset #4f5ba0;
+}
+
+.keypad-key--clear {
+  background-color: #bf0a0a;
+  border: 2px outset #ce2a2a;
 }
 
 .keypad-key--operation {

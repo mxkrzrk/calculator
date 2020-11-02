@@ -10,7 +10,7 @@ function createKeypadKey(key, row) {
     'justify-content-center',
     'align-items-center',
   ]);
-  
+
   // Create key
   let numberKey;
   if (isNaN(key) && key !== '.' && key !== '=') {
@@ -53,11 +53,39 @@ function keypad() {
   const row4 = ['.', 0, '=', '/'];
 
   const keypadRow = createElementHtml('div', ['row', 'keypad']);
+  const keypadCol = createElementHtml('div', [
+    'col-12',
+    'col-md-8',
+    'offset-md-2',
+    'col-lg-6',
+    'offset-lg-3',
+  ]);
+  const keypadRowKeys = createElementHtml('div', ['row', 'keypad-keys']);
 
-  row1.map((el) => createKeypadKey(el, keypadRow));
-  row2.map((el) => createKeypadKey(el, keypadRow));
-  row3.map((el) => createKeypadKey(el, keypadRow));
-  row4.map((el) => createKeypadKey(el, keypadRow));
+  const colC = createElementHtml('div', [
+    'col-3',
+    'offset-9',
+    'd-flex',
+    'justify-content-end',
+    'align-items-center',
+  ]);
+  const c = createElementHtml(
+    'button',
+    ['keypad-key', 'keypad-key--clear'],
+    'C',
+    [{ name: 'data-type', value: 'clear' }]
+  );
+
+  row1.map((el) => createKeypadKey(el, keypadRowKeys));
+  row2.map((el) => createKeypadKey(el, keypadRowKeys));
+  row3.map((el) => createKeypadKey(el, keypadRowKeys));
+  row4.map((el) => createKeypadKey(el, keypadRowKeys));
+  colC.appendChild(c);
+  keypadRowKeys.insertAdjacentElement('afterbegin', colC);
+  c.addEventListener('click', clickKeyHandler);
+
+  keypadCol.appendChild(keypadRowKeys);
+  keypadRow.appendChild(keypadCol);
 
   return keypadRow;
 }
