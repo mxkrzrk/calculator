@@ -18,13 +18,20 @@ const calculationData = {
   display: '',
 };
 
+const logHistory = {
+  operationLog: [],
+  log: [],
+};
+
 function clickKeyHandler(e) {
   const keyType = e.target.dataset.type;
 
   if (keyType === 'number' && calculationData.operation === null) {
+    // Store first operand
     calculationData.firstOperand.push(e.target.innerText);
     calculationData.display = calculationData.firstOperand.join('');
   } else if (keyType === 'number' && calculationData.operation !== null) {
+    // Store second operand
     calculationData.secondOperand.push(e.target.innerText);
     calculationData.display = calculationData.secondOperand.join('');
   } else if (
@@ -36,8 +43,12 @@ function clickKeyHandler(e) {
     keyType === 'operation' &&
     calculationData.secondOperand.length === 0
   ) {
+    // Store operation
     calculationData.operation = e.target.innerText;
     calculationData.display = '';
+    // Log
+    logHistory.log.push(calculationData.firstOperand.join(''));
+    logHistory.log.push(calculationData.operation);
   } else if (
     keyType === 'operation' &&
     calculationData.secondOperand.length > 0
@@ -46,22 +57,34 @@ function clickKeyHandler(e) {
     const op1 = parseFloat(calculationData.firstOperand.join(''));
     const op2 = parseFloat(calculationData.secondOperand.join(''));
     const result = calculationResult(op1, calculationData.operation, op2);
+    // Log
+    logHistory.log.push(calculationData.secondOperand.join(''));
     // Store the result as first operand
     calculationData.firstOperand = Array.from(result.toString());
     calculationData.secondOperand = [];
     calculationData.operation = e.target.innerText;
     calculationData.display = calculationData.firstOperand.join('');
+    // Log
+    logHistory.log.push(calculationData.operation);
   } else if (keyType === 'equal' && calculationData.secondOperand.length > 0) {
+    // Resolve the operation
     const op1 = parseFloat(calculationData.firstOperand.join(''));
     const op2 = parseFloat(calculationData.secondOperand.join(''));
     const result = calculationResult(op1, calculationData.operation, op2);
     calculationData.display = result.toString();
-    // Store the result as first operand
-    calculationData.firstOperand = Array.from(result.toString());
+    // Log
+    logHistory.log.push(calculationData.secondOperand.join(''));
+    logHistory.log.push('=');
+    logHistory.log.push(calculationData.display);
+    logHistory.operationLog.push(logHistory.log.join(''));
+    logHistory.log = [];
+    // Clean operation data
+    calculationData.firstOperand = [];
     calculationData.secondOperand = [];
     calculationData.operation = null;
   } else if (keyType === 'clear') {
     cleanCalculationData(calculationData);
+    logHistory.log = [];
   }
 
   cleanHTML(APP_TAG);
@@ -76,7 +99,7 @@ function app(parentTag) {
   const displayCalc = display(calculationData.display);
   const keypadRow = createElementHtml('div', ['row']);
   const keyboard = keypad();
-  const displayLogOperation = displayLog();
+  const displayLogOperation = displayLog(logHistory.operationLog);
 
   // Append the elements created
   parentTag.insertAdjacentElement('afterbegin', header);

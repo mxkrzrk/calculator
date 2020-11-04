@@ -1,7 +1,7 @@
 import { createElementHtml } from '../../utils/utils.js';
 import './displayLog.css';
 
-function displayLog() {
+function displayLog(log) {
   const displayLogCol = createElementHtml('div', [
     'displayLog',
     'col-12',
@@ -14,9 +14,14 @@ function displayLog() {
     'justify-content-end',
     'align-items-end',
   ]);
-  const displayLogSingleOp = createElementHtml('div', [], '5 + 5');
 
-  displayLogOperation.appendChild(displayLogSingleOp);
+  if (log.length > 0) {
+    log.forEach((op) => {
+      const displayLogSingleOp = createElementHtml('div', [], op);
+      displayLogOperation.appendChild(displayLogSingleOp);
+    });
+  }
+
   displayLog.appendChild(displayLogOperation);
   displayLogCol.appendChild(displayLog);
 
