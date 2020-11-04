@@ -7,6 +7,7 @@ import {
 import nav from './components/nav/nav.js';
 import display from './components/display/display.js';
 import keypad from './components/keypad/keypad.js';
+import displayLog from './components/displayLog/displayLog.js';
 
 const APP_TAG = document.getElementById('app');
 
@@ -73,14 +74,18 @@ function app(parentTag) {
   const navBar = nav();
   const main = createElementHtml('main', ['container-fluid']);
   const displayCalc = display(calculationData.display);
+  const keypadRow = createElementHtml('div', ['row']);
   const keyboard = keypad();
+  const displayLogOperation = displayLog();
 
   // Append the elements created
   parentTag.insertAdjacentElement('afterbegin', header);
-  header.insertAdjacentElement('afterbegin', navBar);
+  header.appendChild(navBar);
   header.insertAdjacentElement('afterend', main);
   main.appendChild(displayCalc);
-  main.appendChild(keyboard);
+  keypadRow.appendChild(keyboard);
+  keypadRow.appendChild(displayLogOperation);
+  main.appendChild(keypadRow);
 }
 
 export { app, APP_TAG, clickKeyHandler };

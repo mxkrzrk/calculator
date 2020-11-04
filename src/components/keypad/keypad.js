@@ -52,13 +52,13 @@ function keypad() {
   const row3 = [1, 2, 3, '*'];
   const row4 = ['.', 0, '=', '/'];
 
-  const keypadRow = createElementHtml('div', ['row', 'keypad']);
   const keypadCol = createElementHtml('div', [
     'col-12',
-    'col-md-8',
-    'offset-md-2',
-    'col-lg-6',
-    'offset-lg-3',
+    'col-md-6',
+    'keypad',
+    'px-md-4',
+    'px-lg-5',
+    'px-xl-5',
   ]);
   const keypadRowKeys = createElementHtml('div', ['row', 'keypad-keys']);
 
@@ -85,9 +85,8 @@ function keypad() {
   c.addEventListener('click', clickKeyHandler);
 
   keypadCol.appendChild(keypadRowKeys);
-  keypadRow.appendChild(keypadCol);
 
-  return keypadRow;
+  return keypadCol;
 }
 
 export default keypad;
