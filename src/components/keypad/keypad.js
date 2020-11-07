@@ -64,7 +64,7 @@ function keypad() {
 
   const colC = createElementHtml('div', [
     'col-3',
-    'offset-9',
+    'offset-6',
     'd-flex',
     'justify-content-end',
     'align-items-center',
@@ -75,14 +75,29 @@ function keypad() {
     'C',
     [{ name: 'data-type', value: 'clear' }]
   );
+  const colAc = createElementHtml('div', [
+    'col-3',
+    'd-flex',
+    'justify-content-end',
+    'align-items-center',
+  ]);
+  const ac = createElementHtml(
+    'button',
+    ['keypad-key', 'keypad-key--clear'],
+    'AC',
+    [{ name: 'data-type', value: 'clearLog' }]
+  );
 
   row1.map((el) => createKeypadKey(el, keypadRowKeys));
   row2.map((el) => createKeypadKey(el, keypadRowKeys));
   row3.map((el) => createKeypadKey(el, keypadRowKeys));
   row4.map((el) => createKeypadKey(el, keypadRowKeys));
   colC.appendChild(c);
+  colAc.appendChild(ac);
   keypadRowKeys.insertAdjacentElement('afterbegin', colC);
+  colC.insertAdjacentElement('afterend', colAc);
   c.addEventListener('click', clickKeyHandler);
+  ac.addEventListener('click', clickKeyHandler);
 
   keypadCol.appendChild(keypadRowKeys);
 

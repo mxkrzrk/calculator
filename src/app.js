@@ -85,6 +85,10 @@ function clickKeyHandler(e) {
   } else if (keyType === 'clear') {
     cleanCalculationData(calculationData);
     logHistory.log = [];
+  } else if (keyType === 'clearLog') {
+    cleanCalculationData(calculationData);
+    logHistory.operationLog = [];
+    logHistory.log = [];
   }
 
   cleanHTML(APP_TAG);
