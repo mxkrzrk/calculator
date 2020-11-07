@@ -10,7 +10,6 @@ function createKeypadKey(key, row) {
     'justify-content-center',
     'align-items-center',
   ]);
-
   // Create key
   let numberKey;
   if (isNaN(key) && key !== '.' && key !== '=') {
@@ -38,7 +37,6 @@ function createKeypadKey(key, row) {
       [{ name: 'data-type', value: 'number' }]
     );
   }
-
   // Append child to row
   keypadCol.appendChild(numberKey);
   row.appendChild(keypadCol);
@@ -64,7 +62,6 @@ function keypad() {
 
   const colC = createElementHtml('div', [
     'col-3',
-    'offset-6',
     'd-flex',
     'justify-content-end',
     'align-items-center',
@@ -87,15 +84,30 @@ function keypad() {
     'AC',
     [{ name: 'data-type', value: 'clearLog' }]
   );
+  const colShowLog = createElementHtml('div', [
+    'col-6',
+    'd-flex',
+    'justify-content-end',
+    'align-items-center',
+  ]);
+  const showLog = createElementHtml(
+    'button',
+    ['keypad-key', 'keypad-key--equal', 'd-md-none'],
+    'Show log',
+    [{ name: 'data-type', value: 'showLog' }]
+  );
 
   row1.map((el) => createKeypadKey(el, keypadRowKeys));
   row2.map((el) => createKeypadKey(el, keypadRowKeys));
   row3.map((el) => createKeypadKey(el, keypadRowKeys));
   row4.map((el) => createKeypadKey(el, keypadRowKeys));
+  colShowLog.appendChild(showLog);
   colC.appendChild(c);
   colAc.appendChild(ac);
-  keypadRowKeys.insertAdjacentElement('afterbegin', colC);
+  keypadRowKeys.insertAdjacentElement('afterbegin', colShowLog);
+  colShowLog.insertAdjacentElement('afterend', colC);
   colC.insertAdjacentElement('afterend', colAc);
+  showLog.addEventListener('click', clickKeyHandler);
   c.addEventListener('click', clickKeyHandler);
   ac.addEventListener('click', clickKeyHandler);
 

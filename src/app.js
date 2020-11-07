@@ -89,6 +89,12 @@ function clickKeyHandler(e) {
     cleanCalculationData(calculationData);
     logHistory.operationLog = [];
     logHistory.log = [];
+  } else if (keyType === 'showLog') {
+    window.scroll({
+      top: 550,
+      left: 0,
+      behavior: 'smooth',
+    });
   }
 
   cleanHTML(APP_TAG);
