@@ -1,5 +1,6 @@
 import { createElementHtml } from '../../utils/utils.js';
 import './nav.css';
+import calculator from './calculator.svg';
 
 function nav() {
   const nav = createElementHtml('nav', [
@@ -9,10 +10,12 @@ function nav() {
     'justify-content-center',
     'align-items-center',
   ]);
-  const icon = createElementHtml('i', ['fas', 'fa-calculator', 'nav-icon']);
+  const div = createElementHtml('div', ['nav-icon']);
+  const icon = createElementHtml('img', [], '', [{name:'src', value: calculator}]);
   const title = createElementHtml('h1', ['nav-title'], 'Calculator');
 
-  nav.insertAdjacentElement('afterbegin', icon);
+  div.appendChild(icon);
+  nav.insertAdjacentElement('afterbegin', div);
   nav.insertAdjacentElement('beforeend', title);
 
   return nav;
