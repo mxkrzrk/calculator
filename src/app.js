@@ -4,7 +4,8 @@ import {
   calculationResult,
   cleanCalculationData,
 } from './utils/utils.js';
-import { dom } from '@fortawesome/fontawesome-svg-core';
+import { library, dom } from '@fortawesome/fontawesome-svg-core';
+import { faCalculator } from '@fortawesome/free-solid-svg-icons';
 import './app.css';
 import nav from './components/nav/nav.js';
 import display from './components/display/display.js';
@@ -122,6 +123,8 @@ function app(parentTag) {
   keypadRow.appendChild(displayLogOperation);
   main.appendChild(keypadRow);
 
+  // Add icon
+  library.add(faCalculator);
   // Convert icons in svg
   dom.i2svg();
 }
