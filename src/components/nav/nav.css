@@ -1,11 +1,11 @@
 .nav {
   background-color: #212747;
-  color: #F2F2F2;
+  color: #f2f2f2;
   height: 15vh;
 }
 
 .nav-icon {
-  width: 1.5rem;
+  font-size: 1.5rem;
 }
 
 .nav-title {

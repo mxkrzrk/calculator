@@ -4,6 +4,8 @@ import {
   calculationResult,
   cleanCalculationData,
 } from './utils/utils.js';
+import { dom } from '@fortawesome/fontawesome-svg-core';
+import './app.css';
 import nav from './components/nav/nav.js';
 import display from './components/display/display.js';
 import keypad from './components/keypad/keypad.js';
@@ -119,6 +121,9 @@ function app(parentTag) {
   keypadRow.appendChild(keyboard);
   keypadRow.appendChild(displayLogOperation);
   main.appendChild(keypadRow);
+
+  // Convert icons in svg
+  dom.i2svg();
 }
 
 export { app, APP_TAG, clickKeyHandler };
