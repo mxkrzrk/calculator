@@ -123,7 +123,7 @@ function app(parentTag) {
   keypadRow.appendChild(displayLogOperation);
   main.appendChild(keypadRow);
 
-  // Add icon
+  // Add icons
   library.add(faCalculator);
   // Convert icons in svg
   dom.i2svg();
