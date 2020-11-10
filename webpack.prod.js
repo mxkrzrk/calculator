@@ -20,8 +20,8 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      template: './src/views/index.html',
-      favicon: './src/favicon.ico',
+      template: './src/public/index.html',
+      favicon: './src/public/favicon.ico',
     }),
   ],
   module: {
