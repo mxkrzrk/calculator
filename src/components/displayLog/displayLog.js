@@ -2,11 +2,12 @@ import { createElementHtml } from '../../utils/utils.js';
 import './displayLog.css';
 
 function displayLog(log) {
-  const displayLogCol = createElementHtml('div', [
-    'displayLog',
-    'col-12',
-    'col-md-6',
-  ]);
+  const displayLogCol = createElementHtml(
+    'div',
+    ['displayLog', 'col-12', 'col-md-6'],
+    '',
+    [{ name: 'id', value: 'log' }]
+  );
   const displayLog = createElementHtml('div', ['displayLog-operation']);
   const displayLogOperation = createElementHtml('div', [
     'd-flex',

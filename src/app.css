@@ -4,6 +4,14 @@ body {
   scroll-behavior: smooth;
 }
 
+header {
+  height: 20vh;
+}
+
+main {
+  height: 80vh;
+}
+
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
   body {

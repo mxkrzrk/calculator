@@ -3,6 +3,7 @@ import {
   cleanHTML,
   calculationResult,
   cleanCalculationData,
+  scrollToLog,
 } from './utils/utils.js';
 import { library, dom } from '@fortawesome/fontawesome-svg-core';
 import { faCalculator } from '@fortawesome/free-solid-svg-icons';
@@ -28,7 +29,6 @@ const logHistory = {
 
 function clickKeyHandler(e) {
   const keyType = e.target.dataset.type;
-
   if (keyType === 'number' && calculationData.operation === null) {
     // Store first operand
     calculationData.firstOperand.push(e.target.innerText);
@@ -93,13 +93,8 @@ function clickKeyHandler(e) {
     logHistory.operationLog = [];
     logHistory.log = [];
   } else if (keyType === 'showLog') {
-    window.scroll({
-      top: 550,
-      left: 0,
-      behavior: 'smooth',
-    });
+    scrollToLog();
   }
-
   cleanHTML(APP_TAG);
   app(APP_TAG);
 }
@@ -113,7 +108,6 @@ function app(parentTag) {
   const keypadRow = createElementHtml('div', ['row']);
   const keyboard = keypad();
   const displayLogOperation = displayLog(logHistory.operationLog);
-
   // Append the elements created
   parentTag.insertAdjacentElement('afterbegin', header);
   header.appendChild(navBar);
@@ -122,7 +116,6 @@ function app(parentTag) {
   keypadRow.appendChild(keyboard);
   keypadRow.appendChild(displayLogOperation);
   main.appendChild(keypadRow);
-
   // Add icons
   library.add(faCalculator);
   // Convert icons in svg
