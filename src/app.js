@@ -1,7 +1,9 @@
 import {
   createElementHtml,
   cleanHTML,
-  calculationResult,
+  storeCalculationData,
+  solveSingleOperation,
+  log,
   cleanCalculationData,
   scrollToLog,
 } from './utils/utils.js';
@@ -22,21 +24,17 @@ const calculationData = {
   display: '',
 };
 
-const logHistory = {
-  operationLog: [],
-  log: [],
+const logData = {
+  logHistory: [],
+  singleOpLog: [],
 };
 
 function clickKeyHandler(e) {
   const keyType = e.target.dataset.type;
   if (keyType === 'number' && calculationData.operation === null) {
-    // Store first operand
-    calculationData.firstOperand.push(e.target.innerText);
-    calculationData.display = calculationData.firstOperand.join('');
+    storeCalculationData(calculationData, e.target.innerText, 'first');
   } else if (keyType === 'number' && calculationData.operation !== null) {
-    // Store second operand
-    calculationData.secondOperand.push(e.target.innerText);
-    calculationData.display = calculationData.secondOperand.join('');
+    storeCalculationData(calculationData, e.target.innerText, 'second');
   } else if (
     keyType === 'operation' &&
     calculationData.firstOperand.length === 0
@@ -46,52 +44,53 @@ function clickKeyHandler(e) {
     keyType === 'operation' &&
     calculationData.secondOperand.length === 0
   ) {
-    // Store operation
-    calculationData.operation = e.target.innerText;
+    storeCalculationData(calculationData, e.target.innerText, 'operation');
     calculationData.display = '';
     // Log
-    logHistory.log.push(calculationData.firstOperand.join(''));
-    logHistory.log.push(calculationData.operation);
+    log(logData, calculationData.firstOperand.join(''), 'store');
+    log(logData, calculationData.operation, 'store');
   } else if (
     keyType === 'operation' &&
     calculationData.secondOperand.length > 0
   ) {
-    // Resolve the operation
-    const op1 = parseFloat(calculationData.firstOperand.join(''));
-    const op2 = parseFloat(calculationData.secondOperand.join(''));
-    const result = calculationResult(op1, calculationData.operation, op2);
+    const result = solveSingleOperation(
+      calculationData.firstOperand.join(''),
+      calculationData.operation,
+      calculationData.secondOperand.join('')
+    );
     // Log
-    logHistory.log.push(calculationData.secondOperand.join(''));
-    // Store the result as first operand
+    log(logData, calculationData.secondOperand.join(''), 'store');
+    // Store the result as first operand and display it
+    // Clean second operand and store new sing operation
     calculationData.firstOperand = Array.from(result.toString());
-    calculationData.secondOperand = [];
-    calculationData.operation = e.target.innerText;
     calculationData.display = calculationData.firstOperand.join('');
+    calculationData.secondOperand = [];
+    storeCalculationData(e.target.innerText, 'operation');
     // Log
-    logHistory.log.push(calculationData.operation);
+    log(logData, calculationData.operation, 'store');
   } else if (keyType === 'equal' && calculationData.secondOperand.length > 0) {
-    // Resolve the operation
-    const op1 = parseFloat(calculationData.firstOperand.join(''));
-    const op2 = parseFloat(calculationData.secondOperand.join(''));
-    const result = calculationResult(op1, calculationData.operation, op2);
+    const result = solveSingleOperation(
+      calculationData.firstOperand.join(''),
+      calculationData.operation,
+      calculationData.secondOperand.join('')
+    );
     calculationData.display = result.toString();
     // Log
-    logHistory.log.push(calculationData.secondOperand.join(''));
-    logHistory.log.push('=');
-    logHistory.log.push(calculationData.display);
-    logHistory.operationLog.push(logHistory.log.join(''));
-    logHistory.log = [];
-    // Clean operation data
-    calculationData.firstOperand = [];
-    calculationData.secondOperand = [];
-    calculationData.operation = null;
-  } else if (keyType === 'clear') {
+    log(logData, calculationData.secondOperand.join(''), 'store');
+    log(logData, '=', 'store');
+    log(logData, calculationData.display, 'store');
+    log(logData, logData.singleOpLog.join(''), 'storeHistory');
+    log(logData, [], 'clean');
     cleanCalculationData(calculationData);
-    logHistory.log = [];
-  } else if (keyType === 'clearLog') {
+  } else if (keyType === 'clean') {
+    calculationData.display = '';
     cleanCalculationData(calculationData);
-    logHistory.operationLog = [];
-    logHistory.log = [];
+    log(logData, [], 'clean');
+  } else if (keyType === 'cleanLog') {
+    calculationData.display = '';
+    cleanCalculationData(calculationData);
+    log(logData, [], 'clean');
+    log(logData, [], 'cleanHistory');
   } else if (keyType === 'showLog') {
     scrollToLog();
   }
@@ -107,7 +106,7 @@ function app(parentTag) {
   const displayCalc = display(calculationData.display);
   const keypadRow = createElementHtml('div', ['row']);
   const keyboard = keypad();
-  const displayLogOperation = displayLog(logHistory.operationLog);
+  const displayLogOperation = displayLog(logData.logHistory);
   // Append the elements created
   parentTag.insertAdjacentElement('afterbegin', header);
   header.appendChild(navBar);

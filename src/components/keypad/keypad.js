@@ -70,7 +70,7 @@ function keypad() {
     'button',
     ['keypad-key', 'keypad-key--clear'],
     'C',
-    [{ name: 'data-type', value: 'clear' }]
+    [{ name: 'data-type', value: 'clean' }]
   );
   const colAc = createElementHtml('div', [
     'col-3',
@@ -82,7 +82,7 @@ function keypad() {
     'button',
     ['keypad-key', 'keypad-key--clear'],
     'AC',
-    [{ name: 'data-type', value: 'clearLog' }]
+    [{ name: 'data-type', value: 'cleanLog' }]
   );
   const colShowLog = createElementHtml('div', [
     'col-6',
