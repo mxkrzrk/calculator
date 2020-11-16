@@ -2,6 +2,8 @@
   background-color: rgba(163, 201, 217, 0.6);
   overflow-y: auto;
   white-space: nowrap;
+  border: 5px solid #262626;
+  border-bottom: none;
 }
 
 .displayLog-operation {
@@ -14,6 +16,10 @@
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
+  .displayLog {
+    border-top: none;
+  }
+
   .displayLog-operation {
     height: 70vh;
   }

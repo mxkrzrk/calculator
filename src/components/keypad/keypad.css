@@ -1,5 +1,5 @@
 .keypad {
-  background-color: #212747;
+  background-color: #0a0b0d;
 }
 
 .keypad-keys {
@@ -12,27 +12,48 @@
   font-weight: 700;
   width: 100%;
   height: 80%;
-  border-radius: 5px;
+  border-radius: 10px;
+  outline: none !important;
 }
 
 .keypad-key--number {
-  background-color: #0d0d0d;
-  border: 2px outset #1f1f1f;
+  background-color: #213140;
+  border: 2px outset #4a738c;
+  transition: border 0.3 ease-out;
+}
+
+.keypad-key--number:active {
+  border: 2px inset #96c6d9;
 }
 
 .keypad-key--equal {
-  background-color: #384173;
-  border: 2px outset #4f5ba0;
+  background-color: #73a2bf;
+  border: 2px outset #96c6d9;
+  transition: border 0.3s ease-out;
+}
+
+.keypad-key--equal:active {
+  border: 2px inset #96c6d9;
 }
 
 .keypad-key--clear {
   background-color: #bf0a0a;
   border: 2px outset #ce2a2a;
+  transition: border 0.3s ease-out;
+}
+
+.keypad-key--clear:active {
+  border: 2px inset #d35959;
 }
 
 .keypad-key--operation {
-  background-color: #7587bf;
-  border: 2px outset #8397d4;
+  background-color: #4a738c;
+  border: 2px outset #73a2bf;
+  transition: border 0.3s ease-out;
+}
+
+.keypad-key--operation:active {
+  border: 2px inset #96c6d9;
 }
 
 .keypad-key--operation:disabled {
