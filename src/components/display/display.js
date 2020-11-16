@@ -4,11 +4,7 @@ import './display.css';
 function display(display) {
   const displayResult = display;
   const displayRow = createElementHtml('div', ['row']);
-  const displayContent = createElementHtml(
-    'div',
-    ['display', 'd-flex', 'align-items-center', 'justify-content-end'],
-    displayResult
-  );
+  const displayContent = createElementHtml('div', ['display'], displayResult);
 
   displayRow.appendChild(displayContent);
 
