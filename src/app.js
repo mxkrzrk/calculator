@@ -31,6 +31,7 @@ const logData = {
 
 function clickKeyHandler(e) {
   const keyType = e.target.dataset.type;
+
   if (keyType === 'number' && calculationData.operation === null) {
     storeCalculationData(calculationData, e.target.innerText, 'first');
   } else if (keyType === 'number' && calculationData.operation !== null) {
@@ -65,7 +66,7 @@ function clickKeyHandler(e) {
     calculationData.firstOperand = Array.from(result.toString());
     calculationData.display = calculationData.firstOperand.join('');
     calculationData.secondOperand = [];
-    storeCalculationData(e.target.innerText, 'operation');
+    storeCalculationData(calculationData, e.target.innerText, 'operation');
     // Log
     log(logData, calculationData.operation, 'store');
   } else if (keyType === 'equal' && calculationData.secondOperand.length > 0) {
@@ -94,6 +95,7 @@ function clickKeyHandler(e) {
   } else if (keyType === 'showLog') {
     scrollToLog();
   }
+  // Update UI
   cleanHTML(APP_TAG);
   app(APP_TAG);
 }
